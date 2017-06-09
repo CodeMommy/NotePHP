@@ -6,6 +6,8 @@
 
 namespace Core;
 
+use Symfony\Component\Filesystem\Filesystem;
+
 /**
  * Class Path
  * @package Core
@@ -82,5 +84,31 @@ class Path
     {
         self::trimPath($path);
         return sprintf('./%s', $path);
+    }
+
+    /**
+     * Copy Directory
+     *
+     * @param $source
+     * @param $target
+     */
+    public static function copyDirectory($source, $target)
+    {
+        $fileSystem = new Filesystem();
+        $directory = dir($source);
+        $fileSystem->mkdir($target);
+        while (($item = $directory->read()) !== false) {
+            if (in_array($item, array('.', '..'))) {
+                continue;
+            }
+            $sourceFile = sprintf('%s/%s', $source, $item);
+            $targetFile = sprintf('%s/%s', $target, $item);
+            if (is_dir($sourceFile)) {
+                self::copyDirectory($sourceFile, $targetFile);
+                continue;
+            }
+            $fileSystem->copy($sourceFile, $targetFile);
+        }
+        $directory->close();
     }
 }

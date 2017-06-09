@@ -15,6 +15,8 @@ use League\CommonMark\CommonMarkConverter;
 class Markdown
 {
     /**
+     * To HTML
+     *
      * @param $markdown
      *
      * @return string

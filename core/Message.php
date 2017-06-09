@@ -13,6 +13,8 @@ namespace Core;
 class Message
 {
     /**
+     * Show
+     *
      * @param $output
      * @param string $message
      *
@@ -25,6 +27,8 @@ class Message
     }
 
     /**
+     * Error
+     *
      * @param $output
      * @param string $message
      *
@@ -37,6 +41,8 @@ class Message
     }
 
     /**
+     * Question
+     *
      * @param $output
      * @param string $message
      *
@@ -49,6 +55,8 @@ class Message
     }
 
     /**
+     * Comment
+     *
      * @param $output
      * @param string $message
      *
@@ -61,6 +69,8 @@ class Message
     }
 
     /**
+     * Information
+     *
      * @param $output
      * @param string $message
      *

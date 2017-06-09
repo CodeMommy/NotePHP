@@ -15,8 +15,6 @@ use Core\Path;
  */
 function taskUpdate()
 {
-    system('php -v');
-    Task::line();
     system('git pull');
     Task::line();
     system('composer self-update');
@@ -48,41 +46,6 @@ function taskUpdateVersion()
 Task::add('update-version', 'Update Version', 'taskUpdateVersion');
 
 /**
- * Task Clear
- */
-function taskClear()
-{
-    $removeList = array();
-    array_push($removeList, __DIR__ . '/application/_runtime');
-    $fileSystem = new Filesystem();
-    foreach ($removeList as $value) {
-        $fileSystem->remove($value);
-    }
-    echo(sprintf('Clear Finished.'));
-}
-
-Task::add('clear', 'Clear', 'taskClear');
-
-function copyDirectory($source, $target)
-{
-    $fileSystem = new Filesystem();
-    $directory = dir($source);
-    $fileSystem->mkdir($target);
-    while (($item = $directory->read()) !== false) {
-        if ($item == '.' || $item == '..') {
-            continue;
-        }
-        if (is_dir($source . '/' . $item)) {
-            copyDirectory($source . '/' . $item, $target . '/' . $item);
-            continue;
-        } else {
-            $fileSystem->copy($source . '/' . $item, $target . '/' . $item);
-        }
-    }
-    $directory->close();
-}
-
-/**
  * Task Publish
  */
 function taskPublish()
@@ -111,7 +74,7 @@ function taskPublish()
         $sourceFile = sprintf('%s/%s', __DIR__, $value);
         $targetFile = sprintf('%s/%s', $pharSource, $value);
         if (is_dir($sourceFile)) {
-            copyDirectory($sourceFile, $targetFile);
+            Path::copyDirectory($sourceFile, $targetFile);
         }
         if (is_file($sourceFile)) {
             $fileSystem->copy($sourceFile, $targetFile);
