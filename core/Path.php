@@ -111,4 +111,26 @@ class Path
         }
         $directory->close();
     }
+
+    /**
+     * Is Directory Empty
+     *
+     * @param $path
+     *
+     * @return bool
+     */
+    public static function isDirectoryEmpty($path)
+    {
+        if (!is_dir($path)) {
+            return false;
+        }
+        $directory = dir($path);
+        while (($item = $directory->read()) !== false) {
+            if (!in_array($item, array('.', '..'))) {
+                return false;
+            }
+        }
+        $directory->close();
+        return true;
+    }
 }

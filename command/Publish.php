@@ -15,19 +15,19 @@ use Core\Message;
 use Core\Path;
 
 /**
- * Class Create
+ * Class Publish
  * @package Command
  */
-class Create extends Command
+class Publish extends Command
 {
     /**
      * Configure
      */
     protected function configure()
     {
-        $this->setName('create');
-        $this->setDescription('Create New Project');
-        $this->setHelp('Create New Project');
+        $this->setName('publish');
+        $this->setDescription('Publish the project');
+        $this->setHelp('Publish the project');
         $this->addArgument('folder', InputArgument::OPTIONAL, 'Folder');
     }
 
@@ -43,16 +43,5 @@ class Create extends Command
     {
         $folder = $input->hasArgument('folder') ? $input->getArgument('folder') : '';
         $localFolder = Path::user($folder);
-        $fileSystem = new Filesystem();
-        if ($fileSystem->exists($localFolder)) {
-            if (!is_dir($localFolder)) {
-                return Message::error($output, sprintf('"%s" is not a folder.', $localFolder));
-            }
-            if (!Path::isDirectoryEmpty($localFolder)) {
-                return Message::error($output, sprintf('Folder "%s" is not empty.', $localFolder));
-            }
-        }
-        Path::copyDirectory(Path::application('base'), $localFolder);
-        return Message::information($output, sprintf('Project created at "%s".', $localFolder));
     }
 }

@@ -1,5 +1,7 @@
 /.idea
-/composer.lock
-/vendor
 /.temporary
 /.publish
+/.demo
+
+/vendor
+/composer.lock

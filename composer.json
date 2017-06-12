@@ -28,13 +28,13 @@
         }
     },
     "require": {
-        "php": ">=5.3.0",
-        "symfony/console": "3.3.*",
-        "symfony/filesystem": "3.3.*",
-        "league/commonmark": "0.15.*"
+        "PHP": ">=5.3.0",
+        "Symfony/Console": "3.3.*",
+        "Symfony/FileSystem": "3.3.*",
+        "League/CommonMark": "0.15.*"
     },
     "require-dev": {
         "CodeMommy/TaskPHP": "*",
-        "symfony/var-dumper": "*"
+        "Symfony/Var-Dumper": "*"
     }
 }
